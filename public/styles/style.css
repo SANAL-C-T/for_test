@@ -100,6 +100,12 @@ body{
 .home .login_container .controls .input3 button:active {
   box-shadow: inset 1px 1px 3px 1px gray;
 }
+@media (max-width:487px) {
+  .home .login_container{
+    min-width: 355px;
+  }
+  
+}
 /*__________________________________ */
 /* Login Page Designing Start */
 /*_________________________________  */
