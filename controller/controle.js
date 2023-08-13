@@ -21,6 +21,34 @@ let datas = [
     image:
       "https://miro.medium.com/v2/resize:fit:1400/1*bMgQ8MhbnQexpqHgIgBJPA.png",
   },
+  {
+    title: "Speaker",
+    description:
+      "This is my Speaking Application accept word wide all languages and emojis",
+    image:
+      "https://is4-ssl.mzstatic.com/image/thumb/Purple126/v4/2d/aa/ed/2daaed95-9257-46ed-66bd-e5151260dc96/AppIcon-0-1x_U007emarketing-0-7-0-85-220.png/512x512bb.jpg",
+  },
+  {
+    title: "TodoApp",
+    description:
+      "This is my Todo app project using Nodejs ejs and css more features available",
+    image:
+      "https://play-lh.googleusercontent.com/92xIZAW-mdwucFX1v8kyTXlLVgZfLczHv8XCVOH1tFc0M3cTRI4q9qJLUM96PqCrgWjc",
+  },
+  {
+    title: "TicTacToe",
+    description:
+      "This is my Tic Tac Toe Game Project created with javascript and html",
+    image:
+      "https://img.freepik.com/premium-vector/tic-tac-toe-game-linear-outline-icon-colour-neon-style-brick-wall-background-light-icon_549897-1775.jpg?w=2000",
+  },
+  {
+    title: "E-commerce",
+    description:
+      "This is my Big and Real Project E-commerce created with MERN Node js and Mongodb",
+    image:
+      "https://blog.hubspot.com/hs-fs/hubfs/ecommerce%20marketing.jpg?width=595&height=400&name=ecommerce%20marketing.jpg",
+  },
 ];
 module.exports = {
   indexControl: (req, res) => {
@@ -33,9 +61,10 @@ module.exports = {
     res.render("error");
   },
   LoginGet: (req, res) => {
-    console.log("reached____________________");
+    console.log(req.session.isAuth + " reached____________________");
     if (req.session.isAuth) {
       res.redirect("/");
+      return;
     } else {
       res.render("login", { error: false });
     }

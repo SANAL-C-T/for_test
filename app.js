@@ -11,7 +11,7 @@ app.use(
     secret: "makuuid",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 1000000 },
   })
 );
 app.set("view engine", "ejs");
