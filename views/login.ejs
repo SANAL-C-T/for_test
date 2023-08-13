@@ -1,0 +1,30 @@
+<%- include('./partials/header.ejs') %>
+    <main class="home">
+        <div class="login_container">
+            <h1 class="text-center text-white">Login</h1>
+            <form action="/login" method="post" class="form">
+                <%if(error) {%>
+                    <p style="font-size: 14px;" class="text-center w-50 mx-auto text-danger alert alert-info p-0 m-0 " id="para">
+                        <%- error -%>
+                    </p>
+                    <%}%>
+                        <div class="controls">
+                            <div class="input input1">
+                                <input type="email" name="email" id="mail">
+                                <label for="" id="email">Email</label>
+                            </div>
+                            <div class="input input2">
+                                <input type="password" name="password" id="pass">
+                                <img src="/images/visible.png" alt=""
+                                    style="width: 20px;height:20px;margin-right:5px;cursor:pointer" id="check">
+                                <label for="" id="passLabel">Password</label>
+                            </div>
+                            <div class="input input3">
+                                <button type="submit" id="sub_btn">Login</button>
+                            </div>
+                        </div>
+            </form>
+        </div>
+    </main>
+
+    <%- include('./partials/footer.ejs') %>
