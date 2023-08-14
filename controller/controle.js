@@ -33,7 +33,7 @@ let datas = [
     description:
       "This is my Todo app project using Nodejs ejs and css more features available",
     image:
-      "https://play-lh.googleusercontent.com/92xIZAW-mdwucFX1v8kyTXlLVgZfLczHv8XCVOH1tFc0M3cTRI4q9qJLUM96PqCrgWjc",
+      "https://www.sketchappsources.com/resources/source-image/sketch-3-todo-list-app-icon-template.png",
   },
   {
     title: "TicTacToe",
@@ -50,6 +50,7 @@ let datas = [
       "https://blog.hubspot.com/hs-fs/hubfs/ecommerce%20marketing.jpg?width=595&height=400&name=ecommerce%20marketing.jpg",
   },
 ];
+
 module.exports = {
   indexControl: (req, res) => {
     console.log(req.session.email);
@@ -64,15 +65,21 @@ module.exports = {
     console.log(req.session.isAuth + " reached____________________");
     if (req.session.isAuth) {
       res.redirect("/");
-      return;
     } else {
-      res.render("login", { error: false });
+      let er = false;
+      if (er) {
+        setTimeout(() => {
+          er = false;
+        }, 2000);
+      }
+      res.render("login", { error: er });
     }
   },
   LoginPost: (req, res) => {
     req.session.email = req.body.email;
     req.session.pass = req.body.password;
     req.session.isAuth = true;
+    // res.header('Cache-Control','no-cache')
     // console.log(`Your Session is ${req.session.email}`);
 
     if (req.body.password != password && req.body.email != email) {

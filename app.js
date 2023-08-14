@@ -4,6 +4,12 @@ const session = require("express-session");
 const router = require("./routes/router");
 const bodyParser = require("body-parser");
 app.use(express.static("public"));
+
+// Controlling Browser Back Button
+app.use((req, res, next) => {
+  res.set("Cache-Control", "no-store");
+  next();
+});
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(
@@ -16,6 +22,7 @@ app.use(
 );
 app.set("view engine", "ejs");
 app.use("/", router);
-app.listen(5001, () => {
-  console.log(`Server Running on 5001 http://localhost:5001`);
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`Server Running on 5001 http://localhost:${PORT}`);
 });

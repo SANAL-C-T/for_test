@@ -1,13 +1,13 @@
 <%- include('./partials/header.ejs') %>
-    <main class="home">
+    <main class="home flex-column">
+        <%if(error) {%>
+            <p style="font-size: 14px;" class="text-center w-50 mx-auto text-danger alert alert-danger p-2 m-3 " id="para">
+                <%- error -%>
+            </p>
+            <%}%>
         <div class="login_container">
             <h1 class="text-center text-white">Login</h1>
             <form action="/login" method="post" class="form">
-                <%if(error) {%>
-                    <p style="font-size: 14px;" class="text-center w-50 mx-auto text-danger alert alert-info p-0 m-0 " id="para">
-                        <%- error -%>
-                    </p>
-                    <%}%>
                         <div class="controls">
                             <div class="input input1">
                                 <input type="email" name="email" id="mail">
