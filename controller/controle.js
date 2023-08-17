@@ -53,48 +53,60 @@ let datas = [
 
 module.exports = {
   indexControl: (req, res) => {
-    console.log(req.session.email);
-    console.log(req.session.pass);
-    console.log(req.session.isAuth);
-    res.render("home", { datas });
+    try {
+      console.log(req.session.email);
+      console.log(req.session.pass);
+      console.log(req.session.isAuth);
+      res.render("home", { datas, reachingStatus: true });
+    } catch (err) {
+      console.log("Error Occured on Rendering Home page Err=" + err);
+    }
   },
   errorPage: (req, res) => {
     res.render("error");
   },
   LoginGet: (req, res) => {
-    console.log(req.session.isAuth + " reached____________________");
-    if (req.session.isAuth) {
-      res.redirect("/");
-    } else {
-      let er = false;
-      if (er) {
-        setTimeout(() => {
-          er = false;
-        }, 2000);
+    try {
+      console.log(req.session.isAuth + " reached____________________");
+      if (req.session.isAuth) {
+        res.redirect("/");
+      } else {
+        let er = false;
+        if (er) {
+          setTimeout(() => {
+            er = false;
+          }, 2000);
+        }
+        res.render("login", { error: er });
       }
-      res.render("login", { error: er });
+    } catch (err) {
+      console.log(`error Occured on Rendering Home Page Err= ${err}`);
     }
   },
   LoginPost: (req, res) => {
-    req.session.email = req.body.email;
-    req.session.pass = req.body.password;
-    req.session.isAuth = true;
-    // res.header('Cache-Control','no-cache')
-    // console.log(`Your Session is ${req.session.email}`);
+    try {
+      req.session.email = req.body.email;
+      req.session.pass = req.body.password;
+      req.session.isAuth = true;
+      // res.header('Cache-Control','no-cache')
+      // console.log(`Your Session is ${req.session.email}`);
 
-    if (req.body.password != password && req.body.email != email) {
-      res.render("login", { error: "Your Email and password Incorrect" });
-      return;
+      if (req.body.password != password && req.body.email != email) {
+        res.render("login", { error: "Your Email and password Incorrect" });
+        return;
+      }
+      if (req.body.password == password && req.body.email != email) {
+        res.render("login", { error: "Your Email Incorrect" });
+        return;
+      }
+      if (req.body.password != password && req.body.email == email) {
+        res.render("login", { error: "Your password Incorrect" });
+        return;
+      }
+      res.redirect("/");
+    } catch (err) {
+      console.log(`Error Occured on Login Post Err= ${err}`);
     }
-    if (req.body.password == password && req.body.email != email) {
-      res.render("login", { error: "Your Email Incorrect" });
-      return;
-    }
-    if (req.body.password != password && req.body.email == email) {
-      res.render("login", { error: "Your password Incorrect" });
-      return;
-    }
-    res.redirect("/");
   },
   logoutControl: (req, res) => {
     req.session.destroy();
