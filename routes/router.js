@@ -1,12 +1,17 @@
 const express = require("express");
-const control = require("../controller/controle");
-const middle = require("../middlewares/sessionCheck");
+const {verifyLogin}= require("../middlewares/sessionCheck");
 const app = express();
+const {
+  indexControl,
+  LoginGet,
+  LoginPost,
+  logoutControl,
+  errorPage,
+} = require("../controller/controle");
 const router = express.Router();
-router.get("/", middle.verifyLogin, control.indexControl);
-router.post("/login", control.LoginPost);
-router.get("/login", control.LoginGet);
-router.get("/logout", control.logoutControl);
-router.get("*", control.errorPage);
+router.get("/", verifyLogin, indexControl);
+router.report("/login").get("/login", LoginGet).post("/login", LoginPost);
 
+router.get("/logout", logoutControl);
+router.get("*", errorPage);
 module.exports = router;

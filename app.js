@@ -6,6 +6,7 @@ const router = require("./routes/router");
 app.use(express.static("public"));
 
 // Controlling Browser Back Button
+
 app.use((req, res, next) => {
   res.set("Cache-Control", "no-store");
   next();

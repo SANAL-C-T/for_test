@@ -54,9 +54,6 @@ let datas = [
 module.exports = {
   indexControl: (req, res) => {
     try {
-      console.log(req.session.email);
-      console.log(req.session.pass);
-      console.log(req.session.isAuth);
       res.render("home", { datas, reachingStatus: true });
     } catch (err) {
       console.log("Error Occured on Rendering Home page Err=" + err);
@@ -67,7 +64,6 @@ module.exports = {
   },
   LoginGet: (req, res) => {
     try {
-      console.log(req.session.isAuth + " reached____________________");
       if (req.session.isAuth) {
         res.redirect("/");
       } else {
@@ -88,9 +84,6 @@ module.exports = {
       req.session.email = req.body.email;
       req.session.pass = req.body.password;
       req.session.isAuth = true;
-      // res.header('Cache-Control','no-cache')
-      // console.log(`Your Session is ${req.session.email}`);
-
       if (req.body.password != password && req.body.email != email) {
         res.render("login", { error: "Your Email and password Incorrect" });
         return;
