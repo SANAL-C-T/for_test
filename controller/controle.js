@@ -89,11 +89,11 @@ module.exports = {
         return;
       }
       if (req.body.password == password && req.body.email != email) {
-        res.render("login", { error: "Your Email Incorrect" });
+        res.render("login", { error: "Your Email and password Incorrect" });
         return;
       }
       if (req.body.password != password && req.body.email == email) {
-        res.render("login", { error: "Your password Incorrect" });
+        res.render("login", { error: "Your Email and password Incorrect" });
         return;
       }
       res.redirect("/");
